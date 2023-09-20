@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from pydantic import BaseModel,conint
 from motor.motor_asyncio import AsyncIOMotorClient
+from dotenv import load_dotenv 
+import os
+
+load_dotenv()
 
 class User(BaseModel):
     name: str
@@ -14,7 +18,8 @@ app = FastAPI()
 @app.post("/register/")
 async def register_user(user: User):
     # Connect to MongoDB
-    client = AsyncIOMotorClient("mongodb+srv://het28082001:dhruvi19121998@cluster0.5csscov.mongodb.net/")
+    mongodb_uri = os.getenv("MONGODB_URI")
+    client = AsyncIOMotorClient(mongodb_uri)
     db = client["pledge_registration"]
     collection = db["Registration"]
 
