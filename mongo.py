@@ -6,7 +6,7 @@ class User(BaseModel):
     name: str
     email: str
     age: int
-    pledge__status: conint(ge=0, le=1)
+    pledge_status: conint(ge=0, le=1)
 
 
 app = FastAPI()
