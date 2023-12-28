@@ -3,6 +3,8 @@ from pydantic import BaseModel,conint
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv 
 import os
+import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -32,6 +34,4 @@ async def register_user(user: User):
     return {"message": "User registered successfully"}
 
 if __name__ == "__mongo__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-   
